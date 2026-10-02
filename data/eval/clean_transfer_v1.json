@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "name": "clean_transfer",
+  "version": "1.0",
+  "frozen_at": "2026-07-13",
+  "selection_policy": "post_training_only",
+  "cases": [
+    {
+      "id": "greeting_01",
+      "category": "greeting",
+      "prompt": "Good morning. Please introduce yourself briefly.",
+      "rubric": {"required_any": ["assistant", "language model", "nanollm"], "forbidden": ["gravity"], "min_chars": 8, "max_chars": 160}
+    },
+    {
+      "id": "greeting_02",
+      "category": "greeting",
+      "prompt": "Hi there—what kind of system am I chatting with?",
+      "rubric": {"required_any": ["assistant", "language model", "nanollm"], "forbidden": ["gravity"], "min_chars": 8, "max_chars": 180}
+    },
+    {
+      "id": "greeting_03",
+      "category": "greeting",
+      "prompt": "Before we begin, tell me who you are in one sentence.",
+      "rubric": {"required_any": ["assistant", "language model", "nanollm"], "forbidden": ["gravity"], "min_chars": 8, "max_chars": 180}
+    },
+    {
+      "id": "greeting_04",
+      "category": "greeting",
+      "prompt": "Hello from a new user. How would you describe your role?",
+      "rubric": {"required_any": ["assistant", "language model", "nanollm"], "forbidden": ["gravity"], "min_chars": 8, "max_chars": 180}
+    },
+    {
+      "id": "greeting_05",
+      "category": "greeting",
+      "prompt": "Give me a short greeting and say what you are.",
+      "rubric": {"required_any": ["assistant", "language model", "nanollm"], "forbidden": ["gravity"], "min_chars": 8, "max_chars": 180}
+    },
+    {
+      "id": "arithmetic_01",
+      "category": "arithmetic",
+      "prompt": "Add seven and eight.",
+      "rubric": {"expected_regex": "(?<![\\d.])15(?![\\d.])", "max_chars": 80}
+    },
+    {
+      "id": "arithmetic_02",
+      "category": "arithmetic",
+      "prompt": "What number is twelve plus five?",
+      "rubric": {"expected_regex": "(?<![\\d.])17(?![\\d.])", "max_chars": 80}
+    },
+    {
+      "id": "arithmetic_03",
+      "category": "arithmetic",
+      "prompt": "Calculate 6 + 7.",
+      "rubric": {"expected_regex": "(?<![\\d.])13(?![\\d.])", "max_chars": 80}
+    },
+    {
+      "id": "arithmetic_04",
+      "category": "arithmetic",
+      "prompt": "If I have nine coins and receive four more, how many coins do I have?",
+      "rubric": {"expected_regex": "(?<![\\d.])13(?![\\d.])", "max_chars": 100}
+    },
+    {
+      "id": "arithmetic_05",
+      "category": "arithmetic",
+      "prompt": "Find the sum of eleven and three.",
+      "rubric": {"expected_regex": "(?<![\\d.])14(?![\\d.])", "max_chars": 80}
+    },
+    {
+      "id": "science_01",
+      "category": "science",
+      "prompt": "In one short sentence, how does a puddle disappear on a warm day?",
+      "rubric": {"required_any": ["evaporat", "vapor", "vapour", "heat"], "min_chars": 12, "max_chars": 220}
+    },
+    {
+      "id": "science_02",
+      "category": "science",
+      "prompt": "Why do objects fall toward Earth?",
+      "rubric": {"required_any": ["gravity", "pull", "force", "attract"], "min_chars": 12, "max_chars": 220}
+    },
+    {
+      "id": "science_03",
+      "category": "science",
+      "prompt": "What change turns liquid water into water vapor?",
+      "rubric": {"required_any": ["evaporat", "vapor", "vapour", "gas", "heat"], "min_chars": 12, "max_chars": 220}
+    },
+    {
+      "id": "science_04",
+      "category": "science",
+      "prompt": "Why does the daytime sky look blue?",
+      "rubric": {"required_any": ["scatter", "light", "wavelength", "atmosphere"], "required_all": ["blue"], "min_chars": 12, "max_chars": 220}
+    },
+    {
+      "id": "science_05",
+      "category": "science",
+      "prompt": "How do green plants use sunlight to make food?",
+      "rubric": {"required_any": ["photosynth", "energy", "sugar", "glucose"], "min_chars": 12, "max_chars": 220}
+    },
+    {
+      "id": "factual_01",
+      "category": "factual",
+      "prompt": "Which planet is the largest in our solar system?",
+      "rubric": {"required_any": ["jupiter"], "max_chars": 120}
+    },
+    {
+      "id": "factual_02",
+      "category": "factual",
+      "prompt": "Who wrote the play Hamlet?",
+      "rubric": {"required_any": ["shakespeare"], "max_chars": 120}
+    },
+    {
+      "id": "factual_03",
+      "category": "factual",
+      "prompt": "What is the capital city of France?",
+      "rubric": {"required_any": ["paris"], "max_chars": 120}
+    },
+    {
+      "id": "factual_04",
+      "category": "factual",
+      "prompt": "Which planet is commonly called the Red Planet?",
+      "rubric": {"required_any": ["mars"], "max_chars": 120}
+    },
+    {
+      "id": "factual_05",
+      "category": "factual",
+      "prompt": "Name the inventor most associated with the first practical telephone.",
+      "rubric": {"required_any": ["bell", "alexander"], "max_chars": 140}
+    },
+    {
+      "id": "writing_01",
+      "category": "writing",
+      "prompt": "Write a three-line poem about moonlight.",
+      "rubric": {"line_count": 3, "required_any": ["moon", "night", "silver", "light"], "max_chars": 240}
+    },
+    {
+      "id": "writing_02",
+      "category": "writing",
+      "prompt": "Create exactly three poetic lines about the wind.",
+      "rubric": {"line_count": 3, "required_any": ["wind", "breeze", "air"], "max_chars": 240}
+    },
+    {
+      "id": "writing_03",
+      "category": "writing",
+      "prompt": "Compose a three-line nature poem about autumn.",
+      "rubric": {"line_count": 3, "required_any": ["autumn", "fall", "leaf", "leaves"], "max_chars": 240}
+    },
+    {
+      "id": "writing_04",
+      "category": "writing",
+      "prompt": "Give me a poem of exactly three lines about the ocean.",
+      "rubric": {"line_count": 3, "required_any": ["ocean", "sea", "wave", "tide"], "max_chars": 240}
+    },
+    {
+      "id": "writing_05",
+      "category": "writing",
+      "prompt": "Make a short three-line poem about dawn.",
+      "rubric": {"line_count": 3, "required_any": ["dawn", "sun", "morning", "light"], "max_chars": 240}
+    }
+  ]
+}

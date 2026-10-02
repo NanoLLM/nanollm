@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "release_tag": "cardputer_mqa_ctx224_v1",
+  "profile": "cardputer-mqa-ctx224",
+  "description": "Cardputer MQA ctx224 public release. Foundation pretrain is the recommended fine-tune starting point; deploy/ contains the embedded firmware artifacts for the checkpoint named in deploy_checkpoint.",
+  "git": {
+    "commit_short": "984b6de",
+    "commit_full": "984b6de11ccacfbc3bdce278c77b94e669c8a85c",
+    "dirty": true
+  },
+  "checkpoints": {
+    "foundation_pretrain": "checkpoints/moe_run_20260718_045345/model_pretrain.pt",
+    "deploy_checkpoint": "checkpoints/moe_run_20260718_045345/model_pretrain.pt",
+    "reference_demo": "checkpoints/science_boost_l18_20260721/final4/model_best.pt"
+  },
+  "tokenizer": {
+    "canonical_dir": "data/tokenizers/cardputer_vocab2048_v1",
+    "release_copy": "tokenizer/"
+  },
+  "cardputer_profile": {
+    "vocab_size": 2048,
+    "block_size": 224,
+    "d_model": 80,
+    "n_layers": 18,
+    "n_heads": 4,
+    "n_kv_heads": 1,
+    "moe_n_experts": 4,
+    "moe_top_k": 1,
+    "moe_shared_d_ff": 160,
+    "d_ff": 320
+  },
+  "artifacts": {
+    "foundation_pretrain": {
+      "path": "foundation/model_pretrain.pt",
+      "exists": true,
+      "size_bytes": 18855199,
+      "sha256": "70acba2972365fe8251f0a998ef760ef37b017621a937826bbcb7d9c3a855f15"
+    },
+    "deploy_model_bin": {
+      "path": "deploy/model.bin",
+      "exists": true,
+      "size_bytes": 4667758,
+      "sha256": "7418ad9713d1ad2e6045d567d946bd203ea1b9a8cc0d569847f6618582998950"
+    },
+    "deploy_firmware": {
+      "path": "deploy/firmware.bin",
+      "exists": true,
+      "size_bytes": 5243152,
+      "sha256": "4f61da31015e6a1a670962dce33f5880f37f40cfe9a34b703fbe17e6ae5c82aa"
+    },
+    "deploy_model_weights_h": {
+      "path": "deploy/model_weights.h",
+      "exists": true,
+      "size_bytes": 29314050,
+      "sha256": "913343a2935d5d59aaf19f2b3c1cc18da48ae9a4fd0d8f99c9c47e5c1905a16f"
+    },
+    "deploy_vocab_weights_h": {
+      "path": "deploy/vocab_weights.h",
+      "exists": true,
+      "size_bytes": 222489,
+      "sha256": "24033efac5b89c2bbdc7d5a7f6ac23abae1787376f145c5595eaf18b4b99730d"
+    },
+    "tokenizer_json": {
+      "path": "tokenizer/tokenizer.json",
+      "exists": true,
+      "size_bytes": 124823,
+      "sha256": "778c5f60ab8379bf87c232658cdcbb445cd2ec07928b2aecca1dd5183bda1985"
+    },
+    "reference_demo_pt": {
+      "path": "reference_demo/model_best.pt",
+      "exists": true,
+      "size_bytes": 18855199,
+      "sha256": "8f0da367b1ae2304d50da0daddc7890ad56c86ce75681a2ec25e0005850fab43"
+    }
+  },
+  "commands": {
+    "fine_tune_from_foundation": "INIT_PRETRAIN=releases/cardputer_mqa_ctx224_v1/foundation/model_pretrain.pt ./scripts/train_science_boost_sft.sh",
+    "flash_firmware": "cd esp32_m5stack && pio run -e m5stack_cardputer_nopsram -t upload",
+    "serial_parity": "python scripts/verify_cardputer_serial.py --reset --checkpoint checkpoints/moe_run_20260718_045345/model_pretrain.pt"
+  },
+  "pinned_artifacts": {
+    "note": "Committed to the repo (option 3) for byte-exact reproducibility from a bare checkout. Verify with: sha256sum <repo_path>.",
+    "files": {
+      "foundation_pretrain": {
+        "repo_path": "releases/cardputer_mqa_ctx224_v1/foundation/model_pretrain.pt",
+        "sha256": "70acba2972365fe8251f0a998ef760ef37b017621a937826bbcb7d9c3a855f15",
+        "size_bytes": 18855199
+      },
+      "reference_demo": {
+        "repo_path": "releases/cardputer_mqa_ctx224_v1/reference_demo/model_best.pt",
+        "sha256": "8f0da367b1ae2304d50da0daddc7890ad56c86ce75681a2ec25e0005850fab43",
+        "size_bytes": 18855199
+      }
+    }
+  }
+}

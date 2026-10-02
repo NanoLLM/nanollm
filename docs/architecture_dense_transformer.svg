@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="1500" viewBox="0 0 1320 1500" role="img" aria-labelledby="title desc"><title id="title">NanoLLM — Dense Decoder Transformer</title><desc id="desc">python/model.py · NanoLLM (use_moe=False) · causal attention · tied output weights</desc><defs><marker id="a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#2d4f8b"/></marker></defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#163153}.title{font-size:30px;font-weight:bold}.sub{font-size:16px;fill:#53627d}.head{font-size:19px;font-weight:bold}.body{font-size:16px}.small{font-size:14px;fill:#53627d}.edge{fill:none;stroke:#2d4f8b;stroke-width:2.5;marker-end:url(#a)}.dash{stroke-dasharray:6 5}</style><rect width="1320" height="1500" fill="#f5f8fc"/>
+<text x="660" y="55" class="title" text-anchor="middle">NanoLLM — Dense Decoder Transformer</text>
+<text x="660" y="85" class="sub" text-anchor="middle">python/model.py · NanoLLM (use_moe=False) · causal attention · tied output weights</text>
+<rect x="410" y="120" width="320" height="80" rx="14" fill="#ffffff" stroke="#8ea0bf" stroke-width="2"/>
+<text x="570.0" y="151" class="head" text-anchor="middle">Token IDs [B, T]</text>
+<text x="570.0" y="178" class="body" text-anchor="middle">BPE-encoded input sequence</text>
+<rect x="170" y="240" width="330" height="108" rx="14" fill="#eef5ff" stroke="#6b8fcf" stroke-width="2"/>
+<text x="335.0" y="271" class="head" text-anchor="middle">Token embedding</text>
+<text x="335.0" y="298" class="body" text-anchor="middle">nn.Embedding(V, D)</text>
+<text x="335.0" y="322" class="body" text-anchor="middle">Vocabulary × model width</text>
+<rect x="640" y="240" width="360" height="108" rx="14" fill="#eefbf8" stroke="#53a79b" stroke-width="2"/>
+<text x="820.0" y="271" class="head" text-anchor="middle">Position embedding</text>
+<text x="820.0" y="298" class="body" text-anchor="middle">nn.Embedding(S, D)</text>
+<text x="820.0" y="322" class="body" text-anchor="middle">Learned positions; omitted with RoPE</text>
+<path d="M570 200V218H335V240" class="edge"/>
+<path d="M570 218H820V240" class="edge"/>
+<circle cx="570" cy="400" r="18" fill="white" stroke="#2d4f8b" stroke-width="2"/>
+<text x="570" y="407" class="head" text-anchor="middle">+</text>
+<path d="M335 348V400H552" class="edge"/>
+<path d="M820 348V400H588" class="edge"/>
+<text x="640" y="385" class="small" text-anchor="start">[B, T, D]</text>
+<rect x="150" y="448" width="740" height="684" rx="20" fill="white" stroke="#ced8e8" stroke-width="2"/>
+<text x="174" y="481" class="head" text-anchor="start">Pre-norm transformer block × n_layers</text>
+<rect x="390" y="515" width="360" height="65" rx="14" fill="#ffffff" stroke="#8ea0bf" stroke-width="2"/>
+<text x="570.0" y="546" class="head" text-anchor="middle">LayerNorm</text>
+<rect x="340" y="618" width="460" height="130" rx="14" fill="#eef5ff" stroke="#6b8fcf" stroke-width="2"/>
+<text x="570.0" y="649" class="head" text-anchor="middle">Causal multi-head attention</text>
+<text x="570.0" y="676" class="body" text-anchor="middle">Wq, Wk, Wv, Wo (bias-free)</text>
+<text x="570.0" y="700" class="body" text-anchor="middle">Optional GQA: n_kv_heads &lt; n_heads</text>
+<text x="570.0" y="724" class="body" text-anchor="middle">Optional RoPE on queries and keys</text>
+<path d="M570 418V515" class="edge"/>
+<path d="M570 580V618" class="edge"/>
+<circle cx="570" cy="790" r="18" fill="white" stroke="#2d4f8b" stroke-width="2"/>
+<text x="570" y="797" class="head" text-anchor="middle">+</text>
+<path d="M570 748V772" class="edge"/>
+<path d="M570 493H230V790H552" class="edge dash"/>
+<text x="246" y="700" class="small" text-anchor="start">Residual</text>
+<rect x="390" y="837" width="360" height="65" rx="14" fill="#ffffff" stroke="#8ea0bf" stroke-width="2"/>
+<text x="570.0" y="868" class="head" text-anchor="middle">LayerNorm</text>
+<rect x="340" y="942" width="460" height="106" rx="14" fill="#f2fbf1" stroke="#70a95e" stroke-width="2"/>
+<text x="570.0" y="973" class="head" text-anchor="middle">Dense feed-forward</text>
+<text x="570.0" y="1000" class="body" text-anchor="middle">Linear(D → d_ff) → GELU</text>
+<text x="570.0" y="1024" class="body" text-anchor="middle">Linear(d_ff → D)</text>
+<path d="M570 808V837" class="edge"/>
+<path d="M570 902V942" class="edge"/>
+<circle cx="570" cy="1090" r="18" fill="white" stroke="#2d4f8b" stroke-width="2"/>
+<text x="570" y="1097" class="head" text-anchor="middle">+</text>
+<path d="M570 1048V1072" class="edge"/>
+<path d="M570 815H230V1090H552" class="edge dash"/>
+<text x="246" y="1000" class="small" text-anchor="start">Residual</text>
+<rect x="940" y="448" width="330" height="684" rx="20" fill="white" stroke="#ced8e8" stroke-width="2"/>
+<text x="964" y="481" class="head" text-anchor="start">Shapes &amp; options</text>
+<text x="964" y="515" class="body" text-anchor="start">B — batch size</text>
+<text x="964" y="546" class="body" text-anchor="start">T — sequence length</text>
+<text x="964" y="577" class="body" text-anchor="start">V — vocabulary size</text>
+<text x="964" y="608" class="body" text-anchor="start">D — model width</text>
+<text x="964" y="639" class="body" text-anchor="start">S — maximum context</text>
+<text x="964" y="670" class="body" text-anchor="start">d_ff — FFN hidden width</text>
+<text x="964" y="701" class="body" text-anchor="start">n_heads — attention heads</text>
+<text x="964" y="775" class="small" text-anchor="start">Lower-triangular causal mask</text>
+<text x="964" y="804" class="small" text-anchor="start">Optional grouped-query attention</text>
+<text x="964" y="833" class="small" text-anchor="start">Optional rotary positions</text>
+<text x="964" y="862" class="small" text-anchor="start">Optional sub-layer dropout</text>
+<text x="964" y="891" class="small" text-anchor="start"></text>
+<text x="964" y="920" class="small" text-anchor="start">Export: model.bin or</text>
+<text x="964" y="949" class="small" text-anchor="start">PROGMEM weight headers</text>
+<text x="964" y="978" class="small" text-anchor="start"></text>
+<text x="964" y="1007" class="small" text-anchor="start">Targets: desktop C++ / ESP32</text>
+<rect x="390" y="1172" width="360" height="64" rx="14" fill="#ffffff" stroke="#8ea0bf" stroke-width="2"/>
+<text x="570.0" y="1203" class="head" text-anchor="middle">Final LayerNorm</text>
+<path d="M570 1108V1172" class="edge"/>
+<rect x="390" y="1276" width="360" height="90" rx="14" fill="#fff8ec" stroke="#d9a441" stroke-width="2"/>
+<text x="570.0" y="1307" class="head" text-anchor="middle">lm_head</text>
+<text x="570.0" y="1334" class="body" text-anchor="middle">Linear(D → V, bias=False)</text>
+<path d="M570 1236V1276" class="edge"/>
+<rect x="850" y="1276" width="360" height="90" rx="14" fill="#ffffff" stroke="#8ea0bf" stroke-width="2"/>
+<text x="1030.0" y="1307" class="head" text-anchor="middle">Logits [B, T, V]</text>
+<text x="1030.0" y="1334" class="body" text-anchor="middle">Next-token scores</text>
+<path d="M750 1321H850" class="edge"/>
+<path d="M390 1321H95V294H170" class="edge dash"/>
+<text x="220" y="1395" class="small" text-anchor="start">Weight tying: lm_head.weight = token_embedding.weight</text>
+<text x="660" y="1442" class="sub" text-anchor="middle">Training: cross-entropy (ignore_index=-1) · Inference: temperature + top-k sampling</text>
+</svg>

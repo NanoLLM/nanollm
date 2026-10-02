@@ -1,0 +1,5 @@
+{
+  "tokenizer_path": "/home/jedld/workspace/nanollm/checkpoints/moe_run_20260718_045345/tokenizer/tokenizer.json",
+  "vocab_file": "/home/jedld/workspace/nanollm/releases/cardputer_mqa_ctx224_v1/deploy/vocab.json",
+  "vocab_size": 2048
+}

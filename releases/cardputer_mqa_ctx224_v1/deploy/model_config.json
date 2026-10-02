@@ -1,0 +1,19 @@
+{
+  "vocab_size": 2048,
+  "d_model": 80,
+  "n_layers": 18,
+  "n_heads": 4,
+  "n_kv_heads": 1,
+  "d_ff": 320,
+  "use_moe": true,
+  "moe_n_experts": 4,
+  "moe_top_k": 1,
+  "moe_shared_d_ff": 160,
+  "max_seq_len": 224,
+  "dropout": 0.02,
+  "causal_attention": true,
+  "quantized": true,
+  "format": "nanollm_moe_v2",
+  "format_version": 2,
+  "runtime_support": "python_only_experimental"
+}

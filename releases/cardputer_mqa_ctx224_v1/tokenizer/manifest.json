@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "name": "cardputer_vocab2048_v1",
+  "vocab_size": 2048,
+  "source_dir": "/home/jedld/workspace/nanollm/checkpoints/moe_run_20260718_045345/tokenizer",
+  "tokenizer_sha256": "778c5f60ab8379bf87c232658cdcbb445cd2ec07928b2aecca1dd5183bda1985",
+  "provenance": "Promoted science-boost lineage (moe_run_20260718_045345)",
+  "vocab_info_sha256": "9b065324c54ad60f8a17c4d9743ee0942667ce16b4c0aeb2da6103bc3f01702c"
+}

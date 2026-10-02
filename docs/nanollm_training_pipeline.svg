@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1110" viewBox="0 0 1440 1110" role="img" aria-labelledby="title desc">
+<title id="title">NanoLLM training and deployment pipeline</title><desc id="desc">Dataset preparation and BPE tokenization lead to pretraining, supervised fine-tuning, evaluation, int8 export, desktop inference and ESP32-S3 deployment. Cross-runtime parity checks feed development iterations.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1110" fill="#f8fafc"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#0f172a}.title{font-size:34px;font-weight:700}.sub{font-size:17px;fill:#475569}.label{font-size:14px;font-weight:700;letter-spacing:1.8px;fill:#64748b}.head{font-size:21px;font-weight:700}.body{font-size:16px;fill:#334155}.small{font-size:14px;fill:#475569}.edge{fill:none;stroke:#64748b;stroke-width:2.5;marker-end:url(#arrow)}.loop{fill:none;stroke:#64748b;stroke-width:2;stroke-dasharray:7 6;marker-end:url(#arrow)}</style>
+<text x="64" y="65" class="title">NanoLLM · From training to on-device inference</text>
+<text x="64" y="98" class="sub">Train on a workstation. Export compact weights. Run locally on the ESP32-S3.</text>
+<text x="64" y="145" class="label">01 / DATA &amp; TRAINING</text>
+<rect x="64" y="168" width="390" height="142" rx="14" fill="white" stroke="#2563eb" stroke-width="2"/><rect x="64" y="168" width="7" height="142" rx="3" fill="#2563eb"/>
+<text x="87" y="203" class="head">Prepare data &amp; tokenizer</text>
+<text x="87" y="235" class="body">FineWeb pretraining corpus</text>
+<text x="87" y="260" class="body">Chat / instruction datasets</text>
+<text x="87" y="285" class="body">BPE tokenizer → encoded training data</text>
+<rect x="524" y="168" width="390" height="142" rx="14" fill="white" stroke="#2563eb" stroke-width="2"/><rect x="524" y="168" width="7" height="142" rx="3" fill="#2563eb"/>
+<text x="547" y="203" class="head">Pretrain</text>
+<text x="547" y="235" class="body">PyTorch on CPU / GPU</text>
+<text x="547" y="260" class="body">Learn next-token prediction</text>
+<text x="547" y="285" class="body">Dense or sparse MoE transformer</text>
+<rect x="984" y="168" width="390" height="142" rx="14" fill="white" stroke="#2563eb" stroke-width="2"/><rect x="984" y="168" width="7" height="142" rx="3" fill="#2563eb"/>
+<text x="1007" y="203" class="head">Supervised fine-tuning</text>
+<text x="1007" y="235" class="body">Continue from pretrained checkpoint</text>
+<text x="1007" y="260" class="body">Train on chat / instruction examples</text>
+<text x="1007" y="285" class="body">Save fine-tuned model checkpoint</text>
+<path d="M454 239H524" class="edge"/>
+<path d="M914 239H984" class="edge"/>
+<path d="M1179 310V361H719V392" class="edge"/>
+<text x="64" y="369" class="label">02 / VALIDATE &amp; EXPORT</text>
+<rect x="524" y="392" width="390" height="142" rx="14" fill="white" stroke="#7c3aed" stroke-width="2"/><rect x="524" y="392" width="7" height="142" rx="3" fill="#7c3aed"/>
+<text x="547" y="427" class="head">Evaluate &amp; select</text>
+<text x="547" y="459" class="body">Check validation loss and behavior</text>
+<text x="547" y="484" class="body">Select model_best.pt</text>
+<text x="547" y="509" class="body">Keep tokenizer and model config aligned</text>
+<rect x="64" y="392" width="390" height="142" rx="14" fill="white" stroke="#7c3aed" stroke-width="2"/><rect x="64" y="392" width="7" height="142" rx="3" fill="#7c3aed"/>
+<text x="87" y="427" class="head">Size for the target</text>
+<text x="87" y="459" class="body">Choose model dimensions &amp; context</text>
+<text x="87" y="484" class="body">Estimate flash and working RAM</text>
+<text x="87" y="509" class="body">Revisit architecture if over budget</text>
+<path d="M454 463H524" class="edge"/>
+<path d="M259 392V338H719V310" class="loop"/>
+<rect x="984" y="392" width="390" height="142" rx="14" fill="white" stroke="#7c3aed" stroke-width="2"/><rect x="984" y="392" width="7" height="142" rx="3" fill="#7c3aed"/>
+<text x="1007" y="427" class="head">Quantize &amp; export</text>
+<text x="1007" y="459" class="body">Convert model weights to int8</text>
+<text x="1007" y="484" class="body">Export model.bin + model_config</text>
+<text x="1007" y="509" class="body">Generate weights / vocabulary headers</text>
+<path d="M914 463H984" class="edge"/>
+<text x="64" y="593" class="label">03 / DEVELOPMENT &amp; DEPLOYMENT</text>
+<rect x="64" y="625" width="390" height="165" rx="14" fill="white" stroke="#059669" stroke-width="2"/><rect x="64" y="625" width="7" height="165" rx="3" fill="#059669"/>
+<text x="87" y="660" class="head">Python reference runtime</text>
+<text x="87" y="692" class="body">Run the quantized model</text>
+<text x="87" y="717" class="body">Use the same tokenizer and config</text>
+<text x="87" y="742" class="body">Reference outputs for parity checks</text>
+<text x="87" y="767" class="body">Optional Gradio checkpoint testing</text>
+<rect x="524" y="625" width="390" height="165" rx="14" fill="white" stroke="#059669" stroke-width="2"/><rect x="524" y="625" width="7" height="165" rx="3" fill="#059669"/>
+<text x="547" y="660" class="head">Desktop C++ inference</text>
+<text x="547" y="692" class="body">Build with CMake</text>
+<text x="547" y="717" class="body">Load model.bin</text>
+<text x="547" y="742" class="body">Run the C++ int8 runtime</text>
+<text x="547" y="767" class="body">Test inference and tokenizer behavior</text>
+<rect x="984" y="625" width="390" height="165" rx="14" fill="white" stroke="#059669" stroke-width="2"/><rect x="984" y="625" width="7" height="165" rx="3" fill="#059669"/>
+<text x="1007" y="660" class="head">ESP32-S3 firmware</text>
+<text x="1007" y="692" class="body">Embed int8 weights via PROGMEM</text>
+<text x="1007" y="717" class="body">Build &amp; flash with PlatformIO</text>
+<text x="1007" y="742" class="body">Weights in flash; buffers in SRAM</text>
+<text x="1007" y="767" class="body">Run the Cardputer keyboard / chat UI</text>
+<path d="M1179 534V566H259V625" class="edge"/>
+<path d="M719 566V625" class="edge"/>
+<path d="M1179 566V625" class="edge"/>
+<text x="64" y="847" class="label">04 / VERIFICATION &amp; ITERATION</text>
+<rect x="294" y="876" width="850" height="118" rx="14" fill="white" stroke="#d97706" stroke-width="2"/><rect x="294" y="876" width="7" height="118" rx="3" fill="#d97706"/>
+<text x="317" y="911" class="head">Cross-runtime verification</text>
+<text x="317" y="943" class="body">Compare Python quantized runtime ↔ desktop C++ ↔ ESP32-S3</text>
+<text x="317" y="968" class="body">Run end-to-end tests, C++ tests, and serial device verification</text>
+<path d="M259 790V825H499V876" class="edge"/>
+<path d="M719 790V876" class="edge"/>
+<path d="M1179 790V825H939V876" class="edge"/>
+<path d="M1144 935H1404V135H719V168" class="loop"/>
+<text x="1170" y="1032" class="small">Iterate: data, architecture,</text>
+<text x="1170" y="1055" class="small">training &amp; runtime</text>
+<text x="64" y="1042" class="label">CARDPUTER VALIDATED CONFIG</text>
+<text x="64" y="1073" class="sub">4.66M parameters · ~4.45 MiB int8 weights in flash · ~191 KiB working RAM</text>
+</svg>

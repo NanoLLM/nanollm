@@ -1,0 +1,17 @@
+{
+  "experiment": "science_boost_sft_l18",
+  "seed": 44,
+  "chat_seed_repeats": 60,
+  "seed_data": "scripts/chat_capability_seed_science_boost_v2.txt",
+  "final_checkpoint": "checkpoints/science_boost_l18_20260721/final4/model_best.pt",
+  "clean_transfer": 0.72,
+  "category_scores": {
+    "arithmetic": 0.6,
+    "factual": 0.8,
+    "greeting": 1.0,
+    "science": 0.8,
+    "writing": 0.4
+  },
+  "suite_artifact": "data/eval/clean_transfer_v1.json",
+  "baseline_promoted_l18_seed44": 0.52
+}

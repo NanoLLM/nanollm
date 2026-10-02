@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  cpp-build:
+    name: C++ Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build C++ inference
+        run: |
+          cmake -S cpp -B cpp/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build cpp/build -j$(nproc)
+
+      - name: Run C++ unit tests
+        run: |
+          ./cpp/build/test_inference
+
+  python-e2e:
+    name: Python End-to-End Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run end-to-end test
+        run: |
+          python test_end_to_end.py
+
+      - name: Run quantized runtime parity
+        run: |
+          # Use artifacts produced by test_end_to_end.py above (fresh clone
+          # has no committed weights/ or checkpoints/).
+          python scripts/compare_quantized_runtime.py \
+            --weights test_weights/model.bin \
+            --config test_weights/model_config.json \
+            --tokenizer test_checkpoints/tokenizer/tokenizer.json
+
+  lint:
+    name: Lint & Static Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install linters
+        run: pip install flake8
+
+      - name: Check Python syntax
+        run: |
+          find python scripts -name "*.py" -exec python -m py_compile {} +
+          python -m py_compile test_end_to_end.py
+          python -m py_compile example_inference.py

@@ -1,0 +1,5 @@
+The quick brown fox jumps over the lazy dog.
+Machine learning is a subset of artificial intelligence.
+Natural language processing enables computers to understand human language.
+Deep learning uses neural networks with multiple layers.
+Transformers have revolutionized the field of NLP.

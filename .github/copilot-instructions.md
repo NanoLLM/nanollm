@@ -1,0 +1,26 @@
+**NanoLLM Agent Guide**
+- **Mission**: Maintain the ultra-compact LLM pipeline spanning `python/`, `cpp/`, and `esp32_m5stack/` so models train in PyTorch and deploy on desktop or ESP32 Cardputer hardware.
+- **Model Core**: `python/model.py` defines a tiny transformer; note `lm_head.weight` is tied to `token_embedding.weight`, so edits to embeddings ripple into logits.
+- **Training Entry**: `python/train.py` both trains NanoLLM and persists the HuggingFace tokenizer into `<output_dir>/tokenizer/tokenizer.json`; reusing checkpoints assumes that path exists.
+- **Tokenizer Rules**: `BPETokenizer` normalizes text to NFD, strips accents, preserves capitalization, and enables byte-level padding—token IDs must stay compatible with the C++ implementations in `cpp/bpe_tokenizer.cpp` and `esp32_m5stack/src/bpe_tokenizer_esp32.cpp`.
+- **Export Flow**: After training, run `python export_weights.py --checkpoint <pt> --output ../weights/model.bin`; this writes `model_config.json`, `vocab.json`, and `tokenizer_info.json` alongside `model.bin` for all downstream consumers.
+- **Quantization Format**: `export_weights.py` emits per-layer scale floats before each weight matrix and bias block; the loader order in `esp32_m5stack/src/model_esp32.cpp` (token emb → pos emb → per-block Q/K/V/O → norms/biases → FF1/FF2 → final norm → lm_head) must remain unchanged.
+- **Binary Consumers**: Desktop C++ expects `model.bin`, `model_config.json`, and optionally `vocab.json` in the same directory so `cpp/inference.cpp` can autodiscover the tokenizer.
+- **Header Export**: Use `python/export_weights_header.py` to generate PROGMEM-friendly headers when enabling `NANOLLM_USE_EMBEDDED_WEIGHTS` in `esp32_m5stack/platformio.ini`.
+- **Dataset Prep**: `scripts/download_datasets.sh` and friends populate `data/`; they rely on HuggingFace datasets, so keep `requirements.txt` in sync with transformer/tokenizer expectations.
+- **Training Defaults**: CI-sized runs use `d_model=32`, `n_layers=1`, `block_size=32`; current Cardputer profile uses `vocab_size=8192`, `d_model=32`, `n_layers=124`, `n_heads=4`, `block_size=512`. Enlarge cautiously because the ESP32 inference code assumes `max_seq_len` fits existing working buffers.
+- **Python Inference**: `example_inference.py` and `NanoLLM.generate` crop context to `max_seq_len`; when changing sequence logic, update the C++ generators to mirror the behavior.
+- **C++ Build**: Desktop builds use standard CMake—`cmake -S cpp -B cpp/build && cmake --build cpp/build`; `test_end_to_end.py` looks for `cpp/build/inference`, so ensure the binary is present before running the suite.
+- **C++ Tests**: `cpp/test_inference.cpp` compiles into `test_inference` with `TEST_MODE=1`; it mocks weights from `weights/` so keep export paths predictable.
+- **ESP32 Workflow**: `esp32_m5stack/deploy.sh` orchestrates PlatformIO builds and SPIFFS uploads; scripted variants `quick_deploy.sh embedded|spiffs` assume exported weights live in `../weights/`.
+- **SPIFFS Layout**: For SPIFFS mode, copy `model.bin` and `model_config.json` into `esp32_m5stack/data/` before calling `pio run --target uploadfs`.
+- **Embedded Mode**: `generate_embedded_weights.sh` runs the header exporter then toggles PlatformIO build flags; verify generated headers land in `esp32_m5stack/src/model_weights.h` before flashing.
+- **Tokenization on Device**: `esp32_m5stack/src/bpe_tokenizer_esp32.cpp` consumes `vocab.json`; keep JSON keys (`id_to_token`, `token_to_id`) intact when evolving exports.
+- **Memory Guardrails**: ESP32 inference allocates buffers sized by `config.max_seq_len * d_model`; increasing either parameter requires revisiting `allocateBuffers()` in `model_esp32.cpp` and display handling in `chat_interface.cpp`.
+- **Testing Harness**: `python test_end_to_end.py` trains, exports, runs Python inference, builds C++, and validates tokenizer round-trips; it writes to `test_checkpoints/` and `test_weights/` and expects cleanup by callers if persistence matters.
+- **Scripting Conventions**: Shell helpers (`example_train.sh`, `esp32_m5stack/*.sh`) presume execution from repo root and use relative paths—mirror that pattern when adding automation.
+- **Coding Style**: Prefer concise logging with progress bars (`tqdm`) on the Python side and `Serial.printf` on ESP32; minimize dynamic allocation in C++ hot paths to respect the 200KB RAM budget.
+- **Configuration Sources**: Runtime knobs live in JSON files (`model_config.json`, `model_weights_config.json`); when adding params, propagate them through Python export, desktop loader, and ESP32 loader in lockstep.
+- **Safety Checks**: The C++ loaders validate quantization flags and layer counts; when modifying serialization, update both the sanity checks and the exporter so ESP32 builds fail fast rather than mis-infer.
+- **Display Loop**: `esp32_m5stack/src/chat_interface.cpp` owns prompt refreshing and keyboard input; keep generation APIs synchronous and small to avoid breaking the UI thread on the Cardputer.
+- **Extending Tests**: Add new pipeline assertions inside `test_end_to_end.py` rather than separate scripts so CI coverage stays centralized and the cleanup logic remains consistent.

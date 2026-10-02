@@ -1,0 +1,5 @@
+{
+  "tokenizer_path": "/home/jedld/workspace/nanollm/checkpoints/science_boost_l18_20260721/chat20/tokenizer/tokenizer.json",
+  "vocab_file": "/home/jedld/workspace/nanollm/releases/cardputer_mqa_ctx224_chat_v1/deploy/vocab.json",
+  "vocab_size": 2048
+}

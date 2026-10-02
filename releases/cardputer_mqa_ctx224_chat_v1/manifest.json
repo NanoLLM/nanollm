@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "release_tag": "cardputer_mqa_ctx224_chat_v1",
+  "variant": "chat",
+  "profile": "cardputer-mqa-ctx224",
+  "description": "Chat SFT release (science-boost); firmware embeds the promoted SFT checkpoint.",
+  "git": {
+    "commit_short": "984b6de",
+    "commit_full": "984b6de11ccacfbc3bdce278c77b94e669c8a85c",
+    "dirty": true
+  },
+  "checkpoints": {
+    "foundation_pretrain": "checkpoints/moe_run_20260718_045345/model_pretrain.pt",
+    "deploy_checkpoint": "checkpoints/science_boost_l18_20260721/final4/model_best.pt",
+    "chat_sft": "checkpoints/science_boost_l18_20260721/final4/model_best.pt"
+  },
+  "sft": {
+    "recipe": "science_boost_v2_60x",
+    "metrics": {
+      "clean_transfer": 0.72,
+      "category_scores": {
+        "arithmetic": 0.6,
+        "factual": 0.8,
+        "greeting": 1.0,
+        "science": 0.8,
+        "writing": 0.4
+      }
+    }
+  },
+  "tokenizer": {
+    "canonical_dir": "data/tokenizers/cardputer_vocab2048_v1",
+    "release_copy": "tokenizer/"
+  },
+  "cardputer_profile": {
+    "vocab_size": 2048,
+    "block_size": 224,
+    "d_model": 80,
+    "n_layers": 18,
+    "n_heads": 4,
+    "n_kv_heads": 1,
+    "moe_n_experts": 4,
+    "moe_top_k": 1,
+    "moe_shared_d_ff": 160,
+    "d_ff": 320
+  },
+  "artifacts": {
+    "foundation_pretrain": {
+      "path": "foundation/model_pretrain.pt",
+      "exists": true,
+      "size_bytes": 18855199,
+      "sha256": "70acba2972365fe8251f0a998ef760ef37b017621a937826bbcb7d9c3a855f15"
+    },
+    "chat_model_best": {
+      "path": "chat/model_best.pt",
+      "exists": true,
+      "size_bytes": 18855199,
+      "sha256": "8f0da367b1ae2304d50da0daddc7890ad56c86ce75681a2ec25e0005850fab43"
+    },
+    "deploy_model_bin": {
+      "path": "deploy/model.bin",
+      "exists": true,
+      "size_bytes": 4667758,
+      "sha256": "98cc51ef45a2f4dec7f7db2064d0c65bcfa9aa08575630b48eac64882a66574d"
+    },
+    "deploy_firmware": {
+      "path": "deploy/firmware.bin",
+      "exists": true,
+      "size_bytes": 5243152,
+      "sha256": "5be8363844666a1cf88f0910d657a845ea4ddc154731a1c217926fb0aa218ac5"
+    },
+    "deploy_model_weights_h": {
+      "path": "deploy/model_weights.h",
+      "exists": true,
+      "size_bytes": 29314047,
+      "sha256": "895e1444a2de741a4f062b8a690faeddef6e056aaba6717bb3210fdf61321021"
+    },
+    "deploy_vocab_weights_h": {
+      "path": "deploy/vocab_weights.h",
+      "exists": true,
+      "size_bytes": 222489,
+      "sha256": "24033efac5b89c2bbdc7d5a7f6ac23abae1787376f145c5595eaf18b4b99730d"
+    },
+    "tokenizer_json": {
+      "path": "tokenizer/tokenizer.json",
+      "exists": true,
+      "size_bytes": 124823,
+      "sha256": "778c5f60ab8379bf87c232658cdcbb445cd2ec07928b2aecca1dd5183bda1985"
+    }
+  },
+  "commands": {
+    "fine_tune_from_foundation": "INIT_PRETRAIN=releases/cardputer_mqa_ctx224_chat_v1/foundation/model_pretrain.pt ./scripts/train_science_boost_sft.sh",
+    "flash_firmware": "cd esp32_m5stack && pio run -e m5stack_cardputer_nopsram -t upload",
+    "serial_parity": "python scripts/verify_cardputer_serial.py --reset --checkpoint checkpoints/science_boost_l18_20260721/final4/model_best.pt"
+  },
+  "pinned_artifacts": {
+    "note": "Committed to the repo (option 3) for byte-exact reproducibility from a bare checkout. Verify with: sha256sum <repo_path>.",
+    "files": {
+      "foundation_pretrain": {
+        "repo_path": "releases/cardputer_mqa_ctx224_chat_v1/foundation/model_pretrain.pt",
+        "sha256": "70acba2972365fe8251f0a998ef760ef37b017621a937826bbcb7d9c3a855f15",
+        "size_bytes": 18855199
+      },
+      "chat_sft": {
+        "repo_path": "releases/cardputer_mqa_ctx224_chat_v1/chat/model_best.pt",
+        "sha256": "8f0da367b1ae2304d50da0daddc7890ad56c86ce75681a2ec25e0005850fab43",
+        "size_bytes": 18855199
+      },
+      "chat_data": {
+        "repo_path": "data/chat/teacher_distilled_qwen3_5_3k.txt",
+        "sha256": "9a8e816597557a4cef05409a535a69d4b79359f727063a59c868875ea5c0fbff",
+        "size_bytes": 670660
+      }
+    }
+  }
+}

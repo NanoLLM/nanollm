@@ -1,0 +1,63 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.pt
+*.pth
+*.bin
+weights/
+test_weights/
+# PlatformIO build cache and downloaded libs (pio lib install)
+.pio/
+# Generated PROGMEM headers — export via train_moe_pipeline.sh or export_* scripts
+**/model_weights.h
+**/vocab_weights.h
+*.log
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+data/*
+!data/chat/
+data/chat/*
+!data/chat/teacher_distilled_qwen3_5_3k.txt
+!data/eval/
+checkpoints/
+# Local Python envs
+.venv/
+# ESP32 runtime data (tokenizer/chat exports, regenerated per build)
+esp32_m5stack/data/
+# Local logs, scratch notes, and ad-hoc checkpoint dirs
+logs/
+next.md
+test_checkpoints_*/
+# Local eval/benchmark artifacts
+baseline_chat_eval*.json
+# Release binaries (ship via GitHub Releases + Hugging Face)
+releases/**/*.bin
+releases/**/*.pt
+releases/**/*.hex
+# Option 3: commit the pinned reproducibility artifacts (byte-identical copies are
+# deduped by Git) so the released firmware is exactly reproducible from a bare
+# checkout. Everything else under releases/ still ships via Releases/HF.
+!releases/cardputer_mqa_ctx224_chat_v1/foundation/model_pretrain.pt
+!releases/cardputer_mqa_ctx224_v1/foundation/model_pretrain.pt
+!releases/cardputer_mqa_ctx224_chat_v1/chat/model_best.pt
+!releases/cardputer_mqa_ctx224_v1/reference_demo/model_best.pt

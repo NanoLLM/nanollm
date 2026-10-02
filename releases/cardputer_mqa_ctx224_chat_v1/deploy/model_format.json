@@ -1,0 +1,14 @@
+{
+  "magic": "NLMO",
+  "version": 2,
+  "quantized": true,
+  "records": [
+    "header",
+    "token_embedding",
+    "pos_embedding",
+    "blocks(attn,norm,router,experts,shared)",
+    "final_norm",
+    "lm_head"
+  ],
+  "note": "Experimental MoE format; not yet supported in cpp/esp32 loaders"
+}

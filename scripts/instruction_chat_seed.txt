@@ -1,0 +1,98 @@
+User: What is 2+2?
+Assistant: 4
+
+User: What is 10 minus 3?
+Assistant: 7
+
+User: What is 6 times 5?
+Assistant: 30
+
+User: Solve for x: 2x + 4 = 12
+Assistant: x equals 4
+
+User: What is 15 percent of 200?
+Assistant: 30
+
+User: Calculate the area of a circle with radius 3
+Assistant: Approximately 28.27 square units
+
+User: Write a haiku about rain.
+Assistant: Soft rain on the roof
+Gray clouds drift through evening
+Puddles hold the moon
+
+User: Write a short joke about cats.
+Assistant: What do you call a cat that eats lasagna? A lasagna cat!
+
+User: Create a three-line poem about autumn leaves.
+Assistant: Golden leaves descend
+Drifting on the cool breeze
+Winter waits quietly
+
+User: Write a bedtime story in two sentences.
+Assistant: A small fox discovered a glowing mushroom in the forest and followed its light home. The forest animals learned to use the light to find their way on dark nights.
+
+User: Write a Python function to compute factorial.
+Assistant: def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+User: Fix this code: print("hello world"
+
+Assistant: Add the closing parenthesis: print("hello world")
+
+User: What is the time complexity of binary search?
+Assistant: O(log n) — each step halves the remaining search space.
+
+User: Write a function that checks if a string is a palindrome.
+Assistant: def is_palindrome(s):
+    return s == s[::-1]
+
+User: Translate "good morning" to Spanish.
+Assistant: Buenos días.
+
+User: How do you say "thank you" in French?
+Assistant: Merci.
+
+User: Translate "the weather is nice today" to German.
+Assistant: Das Wetter ist heute schön.
+
+User: What does "bonjour" mean in English?
+Assistant: It means "good day" or "hello".
+
+User: Summarize photosynthesis in one sentence.
+Assistant: Plants use sunlight to convert water and carbon dioxide into sugar and oxygen.
+
+User: What causes seasons on Earth?
+Assistant: Earth's 23.5-degree axial tilt causes different parts to receive more direct sunlight throughout the year.
+
+User: Why do leaves change color in fall?
+Assistant: Chlorophyll breaks down as days shorten, revealing yellow, orange, and red pigments.
+
+User: Explain why the sky is blue in one sentence.
+Assistant: Air molecules scatter blue light more than other colors, so we see blue sky.
+
+User: List five benefits of regular exercise.
+Assistant: 1. Stronger heart  2. Better mood  3. Improved sleep  4. More energy  5. Lower disease risk
+
+User: Name three primary colors.
+Assistant: Red, blue, and yellow.
+
+User: List five planets in our solar system.
+Assistant: Mercury, Venus, Earth, Mars, Jupiter (there are five more if you count all eight).
+
+User: Name four seasons and their order.
+Assistant: Spring, summer, autumn, winter.
+
+User: What is the capital of France?
+Assistant: Paris.
+
+User: Who painted the Mona Lisa?
+Assistant: Leonardo da Vinci.
+
+User: What year did World War II end?
+Assistant: 1945.
+
+User: What is the largest ocean on Earth?
+Assistant: The Pacific Ocean.

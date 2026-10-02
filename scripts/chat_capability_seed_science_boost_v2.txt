@@ -1,0 +1,328 @@
+# Science/factual/writing boost seed (v2).
+# Base: chat_capability_seed_transfer_v1.txt plus held-out-safe paraphrases
+# that do NOT overlap the frozen clean_transfer_v1.json prompts (audit threshold 0.8).
+
+User: Hi! Please say what kind of assistant you are.
+Assistant: Hello! I am a small NanoLLM language model assistant.
+
+User: Welcome. Could you identify yourself in a few words?
+Assistant: I am a compact language model assistant.
+
+User: Hey assistant, what is your role?
+Assistant: I am an AI assistant that answers short questions and follows brief instructions.
+
+User: Start with a greeting and describe yourself.
+Assistant: Hello! I am a small offline language model assistant.
+
+User: What sort of program are you?
+Assistant: I am a NanoLLM language model assistant.
+
+User: Please introduce the assistant I am speaking to.
+Assistant: You are speaking with a compact AI assistant running on NanoLLM.
+
+User: Say hello and explain what you can do.
+Assistant: Hello! I am an assistant that can answer simple questions and follow short requests.
+
+User: Who is responding to my message?
+Assistant: A small language model assistant is responding.
+
+User: Add eight and six.
+Assistant: 14
+
+User: What number is seven plus five?
+Assistant: 12
+
+User: Calculate 4 + 9.
+Assistant: 13
+
+User: Find the sum of ten and six.
+Assistant: 16
+
+User: If I have eight apples and get three more, how many are there?
+Assistant: 11
+
+User: What is thirteen plus two?
+Assistant: 15
+
+User: Add five to twelve.
+Assistant: 17
+
+User: Calculate 9 + 8.
+Assistant: 17
+
+User: Find the sum of six and eight.
+Assistant: 14
+
+User: What number is eleven plus four?
+Assistant: 15
+
+User: If a box has seven balls and I add six, how many balls are in it?
+Assistant: 13
+
+User: Add three and twelve.
+Assistant: 15
+
+User: Calculate 5 + 8.
+Assistant: 13
+
+User: What is ten plus seven?
+Assistant: 17
+
+User: Find the sum of nine and five.
+Assistant: 14
+
+User: How does wet clothing become dry in warm air?
+Assistant: Heat causes liquid water in the clothing to evaporate into water vapor.
+
+User: What happens to water when a sunny sidewalk dries?
+Assistant: The water absorbs heat and evaporates into the air as vapor.
+
+User: Describe evaporation briefly.
+Assistant: Evaporation changes liquid water into a gas at its surface.
+
+User: How can liquid become a gas below its boiling point?
+Assistant: Faster surface molecules escape the liquid as vapor through evaporation.
+
+User: Explain why rainwater vanishes after the sun comes out.
+Assistant: Sunlight warms the rainwater, causing it to evaporate into the air.
+
+User: What force keeps people on the ground?
+Assistant: Gravity pulls people and other objects toward Earth.
+
+User: Explain why a dropped stone moves downward.
+Assistant: Earth's gravity exerts a force that pulls the stone downward.
+
+User: How does the atmosphere make the sky appear blue?
+Assistant: Air molecules scatter blue wavelengths of sunlight more strongly than longer wavelengths.
+
+User: Describe how a plant turns light into stored energy.
+Assistant: Photosynthesis uses sunlight to make sugar from water and carbon dioxide.
+
+User: What process lets leaves produce sugar?
+Assistant: Photosynthesis lets leaves use light energy to produce glucose.
+
+User: Name the biggest planet orbiting the Sun.
+Assistant: Jupiter.
+
+User: Which world in our solar system has the greatest size?
+Assistant: Jupiter is the largest planet in our solar system.
+
+User: Name the playwright who created Macbeth.
+Assistant: William Shakespeare.
+
+User: Which English writer created Romeo and Juliet?
+Assistant: William Shakespeare.
+
+User: Name France's capital.
+Assistant: Paris.
+
+User: Which city serves as the capital of France?
+Assistant: Paris is the capital of France.
+
+User: What planet is known for its rusty red appearance?
+Assistant: Mars.
+
+User: Name the fourth planet from the Sun.
+Assistant: Mars.
+
+User: Which inventor developed an early practical phone?
+Assistant: Alexander Graham Bell.
+
+User: What is Alexander Graham Bell famous for developing?
+Assistant: He is famous for developing and patenting an early practical telephone.
+
+User: Create exactly three poetic lines about starlight.
+Assistant: Stars wake in darkness
+Silver sparks cross the quiet sky
+Night carries their glow
+
+User: Write a three-line nature poem about a forest.
+Assistant: Tall pines touch the clouds
+Green shadows cover the trail
+Birdsong fills the woods
+
+User: Give me three poetic lines about a river.
+Assistant: Clear water runs on
+Smooth stones shine beneath the stream
+Reeds bend at the bank
+
+User: Make a short poem of three lines about spring.
+Assistant: New buds open wide
+Warm rain wakes the sleeping fields
+Birds return at dawn
+
+User: Compose exactly three lines about a mountain.
+Assistant: High ridges meet clouds
+Cold stone rises through the mist
+Eagles cross the peak
+
+User: Write three poetic lines about a quiet lake.
+Assistant: Still water holds light
+Soft ripples reach the green shore
+Evening settles down
+
+User: Create a three-line poem about sunlight.
+Assistant: Golden rays appear
+Warm light crosses every field
+Shadows fade away
+
+User: Give me exactly three poetic lines about clouds.
+Assistant: White clouds drift slowly
+Their shadows cross the meadow
+Blue sky opens wide
+
+User: Make a nature poem with three lines about winter.
+Assistant: Cold air fills the field
+Frost shines along every branch
+Quiet covers earth
+
+User: Compose three short lines about evening.
+Assistant: Daylight leaves the hills
+Purple shadows fill the road
+One bright star appears
+
+# --- Science boost (paraphrased; not in clean_transfer_v1) ---
+
+User: On a hot afternoon, why does a small pool of water on the pavement go away?
+Assistant: Warmth adds energy so the liquid water evaporates and becomes invisible water vapor in the air.
+
+User: Briefly explain why things drop when you let go of them.
+Assistant: Earth's gravity attracts objects toward its center, so released items fall downward.
+
+User: What happens when liquid water heats enough to become a gas?
+Assistant: The water evaporates, turning from liquid into water vapor.
+
+User: In simple terms, why is the sky blue during the day?
+Assistant: Sunlight scatters in the atmosphere, and blue light scatters more than other colors.
+
+User: How do leaves use sunshine to make their own food?
+Assistant: Through photosynthesis, plants convert light energy into sugar using water and carbon dioxide.
+
+User: Why does a wet towel dry faster on a breezy sunny day?
+Assistant: Heat and moving air speed up evaporation, so water leaves the fabric as vapor.
+
+User: What pulls the Moon around Earth?
+Assistant: Gravity provides the attractive force that keeps the Moon in orbit.
+
+User: Why do we feel heavier standing on Earth than floating in space?
+Assistant: Earth's gravity pulls our mass toward the ground with a noticeable force.
+
+User: What gas do plants release when they photosynthesize?
+Assistant: Plants release oxygen as a byproduct of photosynthesis.
+
+User: Why does metal feel cold even in a warm room?
+Assistant: Metal conducts heat away from your skin quickly, so it feels cooler than wood.
+
+User: How does condensation form on a cold glass?
+Assistant: Water vapor in warm air cools on the cold surface and changes back into liquid droplets.
+
+User: Why do boats float while a coin sinks?
+Assistant: The boat displaces enough water to balance its weight, but the dense coin does not.
+
+User: What makes thunder follow a flash of lightning?
+Assistant: Lightning heats the air instantly, and the sound of the expanding air arrives later because sound travels slower than light.
+
+User: Why do seasons change through the year?
+Assistant: Earth's tilt changes how directly sunlight hits each hemisphere across the year.
+
+User: How does a refrigerator keep food cold inside?
+Assistant: It moves heat from the interior to the outside using a refrigeration cycle.
+
+# --- Factual boost ---
+
+User: Which gas giant is bigger than all the other planets combined?
+Assistant: Jupiter.
+
+User: Who is the author of Romeo and Juliet?
+Assistant: William Shakespeare wrote Romeo and Juliet.
+
+User: What city is the seat of government for France?
+Assistant: Paris.
+
+User: Which rocky planet is nicknamed the Red Planet?
+Assistant: Mars.
+
+User: Which Scottish-born inventor is linked to early telephony?
+Assistant: Alexander Graham Bell.
+
+User: What is the capital of Japan?
+Assistant: Tokyo.
+
+User: Who painted the Mona Lisa?
+Assistant: Leonardo da Vinci painted the Mona Lisa.
+
+User: What is the tallest mountain on Earth?
+Assistant: Mount Everest.
+
+User: Which element has the chemical symbol Au?
+Assistant: Gold.
+
+User: Who proposed the theory of general relativity?
+Assistant: Albert Einstein.
+
+User: What is the largest ocean on Earth?
+Assistant: The Pacific Ocean.
+
+User: Which country contains the city of Cairo?
+Assistant: Egypt.
+
+User: Who was the first person to walk on the Moon?
+Assistant: Neil Armstrong.
+
+User: What instrument did Louis Pasteur help develop methods to preserve?
+Assistant: He developed pasteurization to preserve milk and other foods.
+
+User: Which planet is closest to the Sun?
+Assistant: Mercury.
+
+# --- Writing boost (three-line form; topics differ from frozen suite) ---
+
+User: Write exactly three lines of poetry about starlight.
+Assistant: Pale stars blink above
+Cold light drifts across the field
+Night keeps its secrets
+
+User: Compose a poem with three lines about a forest path.
+Assistant: Moss covers the stones
+Tall trunks filter the sunlight
+Footsteps fade behind
+
+User: Give me three poetic lines describing a river at dusk.
+Assistant: Water turns to glass
+Last light burns on the current
+Frogs begin to call
+
+User: Create a three-line poem about summer heat.
+Assistant: Heat shimmers on stone
+Cicadas hum in the trees
+Shade feels like a gift
+
+User: Write three short poetic lines about a snowy hillside.
+Assistant: Snow blankets the slope
+Every branch holds white silence
+Breath hangs in the air
+
+User: Make a three-line poem about a thunderstorm.
+Assistant: Clouds pile dark and high
+Rain drums hard on the rooftop
+Lightning splits the sky
+
+User: Compose exactly three lines about a butterfly in a garden.
+Assistant: Wings flash orange bright
+It dances above the blooms
+Then vanishes away
+
+User: Write a three-line poem about campfire light.
+Assistant: Sparks climb toward the stars
+Warm faces glow in the circle
+Smoke curls into night
+
+User: Give me three poetic lines about a harvest field.
+Assistant: Gold rows stretch for miles
+Scythes whisper through the grain
+Autumn fills the barn
+
+User: Create a short three-line poem about city rain.
+Assistant: Neon blurs on wet streets
+Umbrellas bloom like flowers
+Traffic hums and fades
