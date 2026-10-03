@@ -1,0 +1,5 @@
+{
+  "vocab_size": 2048,
+  "tokenizer_path": "/home/jedld/workspace/nanollm/checkpoints/moe_run_20260718_045345/tokenizer/tokenizer.json",
+  "tokenizer_fingerprint": "0bf2de7bdf342b1c5932f877b0cbc7bb16e2500d38b09cccd000c8e1eb736040"
+}

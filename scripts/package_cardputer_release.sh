@@ -31,6 +31,13 @@ fi
 FOUNDATION_CKPT="${FOUNDATION_CKPT:-checkpoints/moe_run_20260718_045345/model_pretrain.pt}"
 CHAT_CKPT="${CHAT_CKPT:-checkpoints/science_boost_l18_20260721/final4/model_best.pt}"
 CANONICAL_TOKENIZER="${CANONICAL_TOKENIZER:-data/tokenizers/cardputer_vocab2048_v1}"
+# Source tokenizer for ensure_canonical_tokenizer.py (falls back to the committed
+# release copy when absent); overridable so a new lineage can point at its own run.
+TOKENIZER_SOURCE="${TOKENIZER_SOURCE:-checkpoints/moe_run_20260718_045345/tokenizer}"
+# Per-release provenance (defaults preserve the promoted v1 lineage).
+SFT_RECIPE="${SFT_RECIPE:-science_boost_v2_60x}"
+SEED_DATA_FILE="${SEED_DATA_FILE:-scripts/chat_capability_seed_science_boost_v2.txt}"
+CLEAN_TRANSFER_JSON="${CLEAN_TRANSFER_JSON:-releases/cardputer_mqa_ctx224_chat_v1/chat/clean_transfer_summary.json}"
 SKIP_FIRMWARE="${SKIP_FIRMWARE:-0}"
 UPDATE_SRC_HEADERS="${UPDATE_SRC_HEADERS:-1}"
 
@@ -57,8 +64,8 @@ package_one_release() {
     chat)
       release_tag="${RELEASE_TAG:-cardputer_mqa_ctx224_chat_v1}"
       deploy_ckpt="${DEPLOY_CHECKPOINT:-$CHAT_CKPT}"
-      sft_recipe="science_boost_v2_60x"
-      clean_transfer_json="releases/cardputer_mqa_ctx224_chat_v1/chat/clean_transfer_summary.json"
+      sft_recipe="$SFT_RECIPE"
+      clean_transfer_json="$CLEAN_TRANSFER_JSON"
       description="Chat SFT release (science-boost); firmware embeds the promoted SFT checkpoint."
       ;;
     *)
@@ -85,8 +92,7 @@ _package_release_impl() {
   require_file "$deploy_ckpt"
   require_file "$CANONICAL_TOKENIZER/tokenizer.json"
 
-  "$PYTHON_BIN" scripts/ensure_canonical_tokenizer.py "$CANONICAL_TOKENIZER" \
-    checkpoints/moe_run_20260718_045345/tokenizer
+  "$PYTHON_BIN" scripts/ensure_canonical_tokenizer.py "$CANONICAL_TOKENIZER" "$TOKENIZER_SOURCE"
 
   local foundation_dir="$release_dir/foundation"
   local chat_dir="$release_dir/chat"
@@ -109,7 +115,7 @@ _package_release_impl() {
     printf '%s\n' "$CHAT_CKPT" > "$chat_dir/checkpoint_path.txt"
     cat > "$chat_dir/sft_recipe.txt" <<EOF
 recipe=$sft_recipe
-seed_data=scripts/chat_capability_seed_science_boost_v2.txt
+seed_data=$SEED_DATA_FILE
 stages=chat20:20x1e-4,capability12:12x5e-5,eos8:8x3e-5,final4:4x1e-5
 seed_repeats=60
 init_pretrain=$FOUNDATION_CKPT

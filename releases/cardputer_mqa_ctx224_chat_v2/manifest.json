@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "release_tag": "cardputer_mqa_ctx224_chat_v2",
+  "variant": "chat",
+  "profile": "cardputer-mqa-ctx224",
+  "description": "Chat SFT release (science-boost); firmware embeds the promoted SFT checkpoint.",
+  "git": {
+    "commit_short": "9cd9b71",
+    "commit_full": "9cd9b71e0877b26d250d55d2a9f1859a3bd66dfc",
+    "dirty": true
+  },
+  "pinned_artifacts": {
+    "note": "Committed to the repo (option 3) for byte-exact reproducibility from a bare checkout. Verify with: sha256sum <repo_path>.",
+    "files": {
+      "foundation_pretrain": {
+        "repo_path": "releases/cardputer_mqa_ctx224_chat_v2/foundation/model_pretrain.pt",
+        "sha256": "e40a584c9f6be174daecd3cead6aed18126dd0edb698e4735a061d7ffa895abe",
+        "size_bytes": 18855263
+      },
+      "chat_sft": {
+        "repo_path": "releases/cardputer_mqa_ctx224_chat_v2/chat/model_best.pt",
+        "sha256": "39970ea66d9b104883855f686787eca2bdecfa0aaee03fb5182c9133f9f557f5",
+        "size_bytes": 18855263
+      },
+      "chat_data": {
+        "repo_path": "data/chat/teacher_distilled_qwen3_5_3k.txt",
+        "sha256": "9a8e816597557a4cef05409a535a69d4b79359f727063a59c868875ea5c0fbff",
+        "size_bytes": 670660
+      }
+    }
+  },
+  "checkpoints": {
+    "foundation_pretrain": "checkpoints/moe_run_20261002_133235/model_pretrain.pt",
+    "deploy_checkpoint": "checkpoints/science_boost_l18_20261003v3/final4/model_best.pt",
+    "chat_sft": "checkpoints/science_boost_l18_20261003v3/final4/model_best.pt"
+  },
+  "sft": {
+    "recipe": "science_boost_v3_60x",
+    "metrics": {
+      "clean_transfer": 0.76,
+      "category_scores": {
+        "arithmetic": 1.0,
+        "factual": 0.6,
+        "greeting": 1.0,
+        "science": 0.6,
+        "writing": 0.6
+      }
+    }
+  },
+  "tokenizer": {
+    "canonical_dir": "data/tokenizers/cardputer_vocab2048_v1",
+    "release_copy": "tokenizer/"
+  },
+  "cardputer_profile": {
+    "vocab_size": 2048,
+    "block_size": 224,
+    "d_model": 80,
+    "n_layers": 18,
+    "n_heads": 4,
+    "n_kv_heads": 1,
+    "moe_n_experts": 4,
+    "moe_top_k": 1,
+    "moe_shared_d_ff": 160,
+    "d_ff": 320
+  },
+  "artifacts": {
+    "foundation_pretrain": {
+      "path": "foundation/model_pretrain.pt",
+      "exists": true,
+      "size_bytes": 18855263,
+      "sha256": "e40a584c9f6be174daecd3cead6aed18126dd0edb698e4735a061d7ffa895abe"
+    },
+    "chat_model_best": {
+      "path": "chat/model_best.pt",
+      "exists": true,
+      "size_bytes": 18855263,
+      "sha256": "39970ea66d9b104883855f686787eca2bdecfa0aaee03fb5182c9133f9f557f5"
+    },
+    "deploy_model_bin": {
+      "path": "deploy/model.bin",
+      "exists": true,
+      "size_bytes": 4667758,
+      "sha256": "29687034770b7129518418b6414bc521bf8b61bfd8e976bc32c06542a3228567"
+    },
+    "deploy_firmware": {
+      "path": "deploy/firmware.bin",
+      "exists": true,
+      "size_bytes": 5247808,
+      "sha256": "43c3964a2a621cc4090c03c265f5d7b0ccfec31096c01c8c5d2f1f350dca7668"
+    },
+    "deploy_model_weights_h": {
+      "path": "deploy/model_weights.h",
+      "exists": true,
+      "size_bytes": 29313925,
+      "sha256": "4e65426f5135334e7f6d81d7d2853d865e4db50539aba0cc8e964f59dd16e602"
+    },
+    "deploy_vocab_weights_h": {
+      "path": "deploy/vocab_weights.h",
+      "exists": true,
+      "size_bytes": 222489,
+      "sha256": "24033efac5b89c2bbdc7d5a7f6ac23abae1787376f145c5595eaf18b4b99730d"
+    },
+    "tokenizer_json": {
+      "path": "tokenizer/tokenizer.json",
+      "exists": true,
+      "size_bytes": 124823,
+      "sha256": "778c5f60ab8379bf87c232658cdcbb445cd2ec07928b2aecca1dd5183bda1985"
+    }
+  },
+  "commands": {
+    "fine_tune_from_foundation": "INIT_PRETRAIN=releases/cardputer_mqa_ctx224_chat_v2/foundation/model_pretrain.pt ./scripts/train_science_boost_sft.sh",
+    "flash_firmware": "cd esp32_m5stack && pio run -e m5stack_cardputer_nopsram -t upload",
+    "serial_parity": "python scripts/verify_cardputer_serial.py --reset --checkpoint checkpoints/science_boost_l18_20261003v3/final4/model_best.pt"
+  }
+}

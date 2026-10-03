@@ -1,0 +1,5 @@
+{
+  "tokenizer_path": "data/tokenizers/cardputer_vocab2048_v1/tokenizer.json",
+  "vocab_file": "releases/cardputer_mqa_ctx224_chat_v2/deploy/vocab.json",
+  "vocab_size": 2048
+}

@@ -42,16 +42,16 @@ python scripts/eval_chat_checkpoint.py \
   --greedy \
   --output "$SUITE_OUT"
 
-python - "$SUITE_OUT" "$FINAL_CKPT" "$SUMMARY_OUT" "$TRAIN_SEED" "$CHAT_SEED_REPEATS" <<'PY'
+python - "$SUITE_OUT" "$FINAL_CKPT" "$SUMMARY_OUT" "$TRAIN_SEED" "$CHAT_SEED_REPEATS" "$SEED_DATA" <<'PY'
 import json, sys
 from pathlib import Path
-suite_path, ckpt, out, seed, repeats = sys.argv[1:]
+suite_path, ckpt, out, seed, repeats, seed_data = sys.argv[1:]
 suite = json.loads(Path(suite_path).read_text())
 summary = {
     "experiment": "science_boost_sft_l18",
     "seed": int(seed),
     "chat_seed_repeats": int(repeats),
-    "seed_data": "scripts/chat_capability_seed_science_boost_v2.txt",
+    "seed_data": seed_data,
     "final_checkpoint": ckpt,
     "clean_transfer": suite.get("aggregate_score") or suite.get("score"),
     "category_scores": suite.get("category_scores"),

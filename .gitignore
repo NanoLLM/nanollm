@@ -61,3 +61,5 @@ releases/**/*.hex
 !releases/cardputer_mqa_ctx224_v1/foundation/model_pretrain.pt
 !releases/cardputer_mqa_ctx224_chat_v1/chat/model_best.pt
 !releases/cardputer_mqa_ctx224_v1/reference_demo/model_best.pt
+!releases/cardputer_mqa_ctx224_chat_v2/foundation/model_pretrain.pt
+!releases/cardputer_mqa_ctx224_chat_v2/chat/model_best.pt

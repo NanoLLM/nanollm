@@ -1,0 +1,5 @@
+recipe=science_boost_v3_60x
+seed_data=scripts/chat_capability_seed_science_boost_v3.txt
+stages=chat20:20x1e-4,capability12:12x5e-5,eos8:8x3e-5,final4:4x1e-5
+seed_repeats=60
+init_pretrain=checkpoints/moe_run_20261002_133235/model_pretrain.pt
